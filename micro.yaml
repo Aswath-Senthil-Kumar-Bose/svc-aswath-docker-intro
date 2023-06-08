@@ -1,0 +1,30 @@
+general:
+  name: svc-dom-docker-intro
+  docs: https://github.com/BoseCorp/svc-dom-docker-intro
+  core-platform: 0.2
+  contacts: [Dominick_Peluso@bose.com]
+
+containers:
+
+  - name: psc-folks
+    dir: ./psc-folks
+    memory: {min: 0, max: 64}
+    cpu: {min: 0.0, max: 0.1}
+
+components:
+
+  - name: psc-folks
+    type: stateless
+    accessible-from:
+      bose: true
+    instances: 1
+    public: true
+    containers: [psc-folks]
+    expose:
+      - containerPort: 80
+        servicePort: 80
+        protocol: TCP
+
+tests: []
+
+dependencies: []
