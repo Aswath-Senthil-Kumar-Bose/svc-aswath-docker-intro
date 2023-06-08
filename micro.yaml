@@ -2,7 +2,10 @@ general:
   name: svc-dom-docker-intro
   docs: https://github.com/BoseCorp/svc-dom-docker-intro
   core-platform: 0.2
-  contacts: [Dominick_Peluso@bose.com]
+  contacts:
+   - aswath_senthil_kumar@bose.com
+  quota-group: identity
+  core-platform: 0.2
 
 containers:
 
