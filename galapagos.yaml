@@ -1,0 +1,12 @@
+jenkins:
+  disableConcurrentBuilds: true
+
+deployments:
+
+- branch: master
+  deployEnvironment: stable-test
+
+- branch: (.*)
+
+
+
