@@ -1,0 +1,47 @@
+version: "3.4"
+
+services:
+  psc-folks-dev:
+    build: ./psc-folks
+    ports: ["8080:80"]
+    volumes: ["./psc-folks:/app"]
+
+  # Your new container defintion
+  # cow-folks:
+  #   build: 
+  #     context: ./cow-folks
+  #     target: base  # select the base stage
+  #   ports: ["9000:80"]
+  #   volumes: ["./cow-folks:/code"]
+  #   depends_on: ["psc-folks"]
+  #   environment:
+  #     - PSC_FOLKS_URL=http://psc-folks/
+  #     - APP_PORT=80
+
+  psc-folks:
+    image: nonprod-registry.bose.io/svc-dom-docker-intro/psc-folks:master.4.25 # Pull from the Bose Docker registry (Harbor)
+    ports:
+      - 9001:80
+
+  cow-folks:
+    build: 
+      context: ./cow-folks
+      target: base  # select the base stage
+    ports: ["9000:80"]
+    volumes: ["./cow-folks:/code"]
+    depends_on: ["psc-folks"]
+    environment:
+      - PSC_FOLKS_URL=http://psc-folks/
+      - APP_PORT=80
+  
+  cow-folks-cloud:
+    build: 
+      context: ./cow-folks
+      target: base  # select the base stage
+    ports: ["9002:80"]
+    volumes: ["./cow-folks:/code"]
+
+  unit-test:
+    build: 
+      context: ./cow-folks
+      target: unit-test  # select the unit-test stage
